@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
-VisualStudioVersion = 17.14.37628.2 d17.14
+VisualStudioVersion = 17.14.37628.2
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Domain", "Warehouse.Domain\Warehouse.Domain.csproj", "{5F0C1827-29BD-4093-803A-2C6A6C87190C}"
 EndProject
@@ -29,6 +29,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Элементы решен
 		.gitignore = .gitignore
 	EndProjectSection
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Warehouse.Application.Tests", "Warehouse.Application.Tests\Warehouse.Application.Tests.csproj", "{241B5828-9133-41BC-8D44-0EE007CE48AA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -55,6 +57,10 @@ Global
 		{B614A827-A52F-492C-9746-55924060B5B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B614A827-A52F-492C-9746-55924060B5B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B614A827-A52F-492C-9746-55924060B5B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{241B5828-9133-41BC-8D44-0EE007CE48AA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{241B5828-9133-41BC-8D44-0EE007CE48AA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{241B5828-9133-41BC-8D44-0EE007CE48AA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{241B5828-9133-41BC-8D44-0EE007CE48AA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
