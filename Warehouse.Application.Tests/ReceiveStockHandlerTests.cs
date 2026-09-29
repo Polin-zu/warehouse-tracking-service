@@ -16,11 +16,12 @@ namespace Warehouse.Application.Tests;
 public class ReceiveStockHandlerTests
 {
     private readonly Mock<IStockRepository> _repoMock = new();
+    private readonly Mock<IEventPublisher> _publisherMock = new();
     private readonly ReceiveStockHandler _handler;
 
     public ReceiveStockHandlerTests()
     {
-        _handler = new ReceiveStockHandler(_repoMock.Object);
+        _handler = new ReceiveStockHandler(_repoMock.Object, _publisherMock.Object);
     }
     [Fact]
     public async Task HandleAsync_ShouldCreateNewRecord_WhenNoneExists()

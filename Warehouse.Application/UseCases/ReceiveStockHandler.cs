@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 using Warehouse.Application.Abstractions;
+using Warehouse.Application.Events;
 using Warehouse.Domain.Entities; 
 
 namespace Warehouse.Application.UseCases;
@@ -13,9 +14,11 @@ namespace Warehouse.Application.UseCases;
 public class ReceiveStockHandler
 {
     private readonly IStockRepository _stockRepository;
-    public ReceiveStockHandler(IStockRepository stockRepository)
+    private readonly IEventPublisher _eventPublisher;
+    public ReceiveStockHandler(IStockRepository stockRepository, IEventPublisher eventPublisher)
     {
         _stockRepository = stockRepository;
+        _eventPublisher = eventPublisher;
     }
     public async Task HandleAsync(Guid itemId, Guid locationId, int quantity, CancellationToken cancellationToken)
     {
@@ -31,5 +34,8 @@ public class ReceiveStockHandler
             stockRecord.Receive(quantity);
         }
         await _stockRepository.SaveChangesAsync(cancellationToken);
+
+        var stockEvent = new StockReceivedEvent(itemId, locationId, quantity, DateTime.UtcNow);
+        await _eventPublisher.PublishAsync("stock-events", stockEvent, cancellationToken);
     }
 }
