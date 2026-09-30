@@ -29,7 +29,7 @@ public class WithdrawStockHandler
         stockRecord.Withdraw(quantity);
         await _stockRepository.SaveChangesAsync(cancellationToken);
 
-        var stockEvent = new StockWithdrawnEvent(itemId, locationId, quantity, DateTime.UtcNow);
+        var stockEvent = new StockWithdrawnEvent(Guid.NewGuid(), itemId, locationId, quantity, DateTime.UtcNow);
         await _eventPublisher.PublishAsync("stock-events", stockEvent, cancellationToken);
 
     }

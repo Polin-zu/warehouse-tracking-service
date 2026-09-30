@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Warehouse.Application.Events;
 
-public record StockMovedEvent(Guid ItemId, Guid FromLocationId, 
+public record StockMovedEvent(Guid EventId, Guid ItemId, Guid FromLocationId, 
     Guid ToLocationId, int Quantity, DateTime OccuresAtUtc);
 
 

@@ -35,7 +35,7 @@ public class ReceiveStockHandler
         }
         await _stockRepository.SaveChangesAsync(cancellationToken);
 
-        var stockEvent = new StockReceivedEvent(itemId, locationId, quantity, DateTime.UtcNow);
+        var stockEvent = new StockReceivedEvent(Guid.NewGuid(), itemId, locationId, quantity, DateTime.UtcNow);
         await _eventPublisher.PublishAsync("stock-events", stockEvent, cancellationToken);
     }
 }
