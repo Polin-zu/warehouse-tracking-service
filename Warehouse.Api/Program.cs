@@ -1,10 +1,12 @@
 using Microsoft.EntityFrameworkCore;
+using StackExchange.Redis;
 using Warehouse.Application.Abstractions;
 using Warehouse.Application.UseCases;
 using Warehouse.Application.UseCases;
 using Warehouse.Infrastructure.Messaging;
 using Warehouse.Infrastructure.Persistence;
 using Warehouse.Infrastructure.Repositories;
+using StackExchange.Redis;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<WarehouseDbContext>(options =>
@@ -17,6 +19,13 @@ builder.Services.AddScoped<MoveStockHandler>();
 builder.Services.AddSingleton<IEventPublisher>(
     _ => new KafkaEventPublisher(builder.Configuration["Kafka:BootstrapServers"]!));
 
+builder.Services.AddSingleton<IConnectionMultiplexer>(
+    _ => ConnectionMultiplexer.Connect(builder.Configuration["Redis:ConnectionString"]!));
+
+builder.Services.AddHostedService(sp => new StockEventConsumer(
+    builder.Configuration["Kafka:BootstrapServers"]!,
+    sp.GetRequiredService<IConnectionMultiplexer>(),
+    sp.GetRequiredService<ILogger<StockEventConsumer>>()));
 // Add services to the container.
 
 builder.Services.AddControllers();

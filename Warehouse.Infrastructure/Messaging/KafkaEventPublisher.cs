@@ -22,10 +22,15 @@ public class KafkaEventPublisher : IEventPublisher, IAsyncDisposable
     public async Task PublishAsync<TEvent>(string topic, TEvent @event, CancellationToken cancellationToken)
     {
         var json = JsonSerializer.Serialize(@event);
+        var headers = new Headers
+        {
+            { "event-type", Encoding.UTF8.GetBytes(typeof(TEvent).Name) }
+        };
         var message = new Message<string, string>
         {
             Key = Guid.NewGuid().ToString(),
-            Value = json
+            Value = json,
+            Headers = headers
         };
         await _producer.ProduceAsync(topic, message, cancellationToken);
     }
