@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Grpc.AspNetCore" Version="2.84.0" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="8.0.31">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -15,6 +16,13 @@
 	<ProjectReference Include="..\Warehouse.Application\Warehouse.Application.csproj" />
 	<ProjectReference Include="..\Warehouse.Infrastructure\Warehouse.Infrastructure.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Protos\" />
+  </ItemGroup>
+	<ItemGroup>
+		<Protobuf Include="Protos\stock.proto" GrpcServices="Server" />
+	</ItemGroup>
 
 
 </Project>

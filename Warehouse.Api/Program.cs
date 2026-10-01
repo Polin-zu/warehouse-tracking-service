@@ -7,6 +7,7 @@ using Warehouse.Infrastructure.Messaging;
 using Warehouse.Infrastructure.Persistence;
 using Warehouse.Infrastructure.Repositories;
 using StackExchange.Redis;
+using Warehouse.Api.Grpc;
 
 var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddDbContext<WarehouseDbContext>(options =>
@@ -29,6 +30,7 @@ builder.Services.AddHostedService(sp => new StockEventConsumer(
 // Add services to the container.
 
 builder.Services.AddControllers();
+builder.Services.AddGrpc();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
@@ -47,5 +49,6 @@ app.UseHttpsRedirection();
 app.UseAuthorization();
 
 app.MapControllers();
+app.MapGrpcService<StockGrpcService>();
 
 app.Run();

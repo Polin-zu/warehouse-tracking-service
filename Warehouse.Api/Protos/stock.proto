@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option csharp_namespace = "Warehouse.Api.Grpc";
+
+package stock;
+
+service StockReceive{
+	rpc GetStockLevel (GetStockLevelRequest) returns (GetStockLevelResponse);
+}
+
+message GetStockLevelRequest {
+	string item_id = 1;
+	string location_id = 2;
+}
+
+message GetStockLevelResponse {
+	int32 quantity = 1;
+}
